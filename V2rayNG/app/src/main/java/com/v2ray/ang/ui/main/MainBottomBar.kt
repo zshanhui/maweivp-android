@@ -110,7 +110,7 @@ fun MainBottomBar(
                 contentDescription = stringResource(
                     if (isRunning) R.string.acc_stop else R.string.acc_start
                 ),
-                tint = Color.White,
+                tint = if (isRunning) MaterialTheme.colorScheme.onPrimary else Color.White,
                 modifier = Modifier
                     .size(24.dp)
                     .graphicsLayer { rotationZ = rotationAnim.value }

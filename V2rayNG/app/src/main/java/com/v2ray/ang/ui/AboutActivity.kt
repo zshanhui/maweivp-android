@@ -1,6 +1,5 @@
 package com.v2ray.ang.ui
 
-import android.content.Intent
 import android.os.Bundle
 import android.webkit.WebView
 import androidx.compose.foundation.layout.Column
@@ -47,18 +46,14 @@ class AboutActivity : BaseComponentActivity() {
     @Composable
     override fun ScreenContent() {
         AboutScreen(
-            onBackClick = { finish() },
-            onTranslatorsClick = {
-                startActivity(Intent(this, TranslatorsActivity::class.java))
-            }
+            onBackClick = { finish() }
         )
     }
 }
 
 @Composable
 fun AboutScreen(
-    onBackClick: () -> Unit,
-    onTranslatorsClick: () -> Unit
+    onBackClick: () -> Unit
 ) {
     val context = LocalContext.current
     var showOssDialog by remember { mutableStateOf(false) }
@@ -85,7 +80,7 @@ fun AboutScreen(
             SettingsMenuItem(
                 icon = painterResource(R.drawable.ic_source_code_24dp),
                 title = stringResource(R.string.title_source_code),
-                onClick = { Utils.openUri(context, AppConfig.APP_URL) }
+                onClick = { Utils.openUri(context, AppConfig.APP_SOURCE_URL) }
             )
             SettingsMenuItem(
                 icon = painterResource(R.drawable.license_24px),
@@ -93,19 +88,9 @@ fun AboutScreen(
                 onClick = { showOssDialog = true }
             )
             SettingsMenuItem(
-                icon = painterResource(R.drawable.ic_translate_24dp),
-                title = stringResource(R.string.title_translators),
-                onClick = onTranslatorsClick
-            )
-            SettingsMenuItem(
                 icon = painterResource(R.drawable.ic_feedback_24dp),
                 title = stringResource(R.string.title_pref_feedback),
                 onClick = { Utils.openUri(context, AppConfig.APP_ISSUES_URL) }
-            )
-            SettingsMenuItem(
-                icon = painterResource(R.drawable.ic_telegram_24dp),
-                title = stringResource(R.string.title_tg_channel),
-                onClick = { Utils.openUri(context, AppConfig.TG_CHANNEL_URL) }
             )
             SettingsMenuItem(
                 icon = painterResource(R.drawable.ic_privacy_24dp),

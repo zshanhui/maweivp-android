@@ -2,6 +2,7 @@ package com.v2ray.ang
 
 import android.app.Application
 import android.content.Context
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
 import androidx.work.Configuration
 import androidx.work.WorkManager
@@ -44,6 +45,10 @@ class AngApplication : Application() {
 
         // Ensure critical preference defaults are present in MMKV early
         SettingsManager.initApp(this)
+
+        // Dark-only build: force night resources so window backgrounds and day/night XML match the
+        // Compose theme even when the system is in light mode.
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
 
         // Initialize theme state from MMKV
         ThemeManager.refresh()

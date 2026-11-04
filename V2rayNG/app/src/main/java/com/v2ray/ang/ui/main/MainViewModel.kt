@@ -786,11 +786,11 @@ class MainViewModel(
     }
 
     fun removeServerAndRefresh(guid: String) {
-        if (guid == uiState.value.selectedGuid) {
-            toast(R.string.toast_action_not_allowed)
-            return
-        }
         viewModelScope.launch(ioDispatcher) {
+            val nextSelection = selectionAfterServerRemoval(guid, uiState.value.selectedGuid)
+            if (nextSelection != uiState.value.selectedGuid) {
+                _uiState.update { it.copy(selectedGuid = nextSelection) }
+            }
             dataSource.removeServer(guid)
             cacheMutex.withLock { groupDataCache.clear() }
             setupGroupTab(forceRefresh = true).join()
@@ -967,3 +967,13 @@ class MainViewModel(
         const val TEST_RESULT_FLUSH_INTERVAL_MS = 500L
     }
 }
+
+/**
+ * Selection left behind after a profile is removed.
+ *
+ * Removing the selected profile is allowed: it is deselected first, and
+ * [com.v2ray.ang.handler.MmkvManager.removeServer] drops the persisted key, so the in-memory
+ * state and storage stay in step. Removing any other profile leaves the selection untouched.
+ */
+internal fun selectionAfterServerRemoval(removedGuid: String, selectedGuid: String?): String? =
+    if (removedGuid == selectedGuid) null else selectedGuid

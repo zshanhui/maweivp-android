@@ -101,7 +101,7 @@ fun MainDrawerContent(drawerState: DrawerState, onNavigate: (MainDestination) ->
                         }
                     )
                     Text(
-                        text = stringResource(R.string.app_name),
+                        text = stringResource(R.string.drawer_app_name),
                         style = MaterialTheme.typography.titleLarge,
                         color = MaterialTheme.colorScheme.onSurface
                     )

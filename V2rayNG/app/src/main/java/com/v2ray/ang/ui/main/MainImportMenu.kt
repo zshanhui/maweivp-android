@@ -10,21 +10,32 @@ import com.v2ray.ang.extension.isComplexType
 import com.v2ray.ang.ui.compose.AppDropdownMenuItems
 import com.v2ray.ang.ui.compose.SelectListDialog
 
-private enum class ImportMenuAction(@StringRes val labelRes: Int, val action: MainAction) {
-    QRCode(R.string.menu_item_import_config_qrcode, MainAction.ImportQRcode),
-    Clipboard(R.string.menu_item_import_config_clipboard, MainAction.ImportClipboard),
-    LocalFile(R.string.menu_item_import_config_local, MainAction.ImportConfigLocal),
-    PolicyGroup(R.string.menu_item_import_config_policy_group, MainAction.ImportManually(EConfigType.POLICYGROUP.value)),
-    ProxyChain(R.string.menu_item_import_config_proxy_chain, MainAction.ImportManually(EConfigType.PROXYCHAIN.value)),
-    Vmess(R.string.menu_item_import_config_manually_vmess, MainAction.ImportManually(EConfigType.VMESS.value)),
-    Vless(R.string.menu_item_import_config_manually_vless, MainAction.ImportManually(EConfigType.VLESS.value)),
-    Shadowsocks(R.string.menu_item_import_config_manually_ss, MainAction.ImportManually(EConfigType.SHADOWSOCKS.value)),
-    Socks(R.string.menu_item_import_config_manually_socks, MainAction.ImportManually(EConfigType.SOCKS.value)),
-    Http(R.string.menu_item_import_config_manually_http, MainAction.ImportManually(EConfigType.HTTP.value)),
-    Trojan(R.string.menu_item_import_config_manually_trojan, MainAction.ImportManually(EConfigType.TROJAN.value)),
-    WireGuard(R.string.menu_item_import_config_manually_wireguard, MainAction.ImportManually(EConfigType.WIREGUARD.value)),
-    Hysteria2(R.string.menu_item_import_config_manually_hysteria2, MainAction.ImportManually(EConfigType.HYSTERIA2.value))
+internal enum class ImportMenuAction(
+    @StringRes val labelRes: Int,
+    val action: MainAction,
+    val isVisible: Boolean,
+) {
+    QRCode(R.string.menu_item_import_config_qrcode, MainAction.ImportQRcode, isVisible = true),
+    Clipboard(R.string.menu_item_import_config_clipboard, MainAction.ImportClipboard, isVisible = false),
+    LocalFile(R.string.menu_item_import_config_local, MainAction.ImportConfigLocal, isVisible = false),
+    PolicyGroup(R.string.menu_item_import_config_policy_group, MainAction.ImportManually(EConfigType.POLICYGROUP.value), isVisible = false),
+    ProxyChain(R.string.menu_item_import_config_proxy_chain, MainAction.ImportManually(EConfigType.PROXYCHAIN.value), isVisible = false),
+    Vmess(R.string.menu_item_import_config_manually_vmess, MainAction.ImportManually(EConfigType.VMESS.value), isVisible = false),
+    Vless(R.string.menu_item_import_config_manually_vless, MainAction.ImportManually(EConfigType.VLESS.value), isVisible = false),
+    Shadowsocks(R.string.menu_item_import_config_manually_ss, MainAction.ImportManually(EConfigType.SHADOWSOCKS.value), isVisible = false),
+    Socks(R.string.menu_item_import_config_manually_socks, MainAction.ImportManually(EConfigType.SOCKS.value), isVisible = false),
+    Http(R.string.menu_item_import_config_manually_http, MainAction.ImportManually(EConfigType.HTTP.value), isVisible = false),
+    Trojan(R.string.menu_item_import_config_manually_trojan, MainAction.ImportManually(EConfigType.TROJAN.value), isVisible = false),
+    WireGuard(R.string.menu_item_import_config_manually_wireguard, MainAction.ImportManually(EConfigType.WIREGUARD.value), isVisible = false),
+    Hysteria2(R.string.menu_item_import_config_manually_hysteria2, MainAction.ImportManually(EConfigType.HYSTERIA2.value), isVisible = false)
 }
+
+/**
+ * Entries the add menu shows. Hidden entries keep their label, action and enum identity, so
+ * re-enabling one is a single `isVisible = true` change; nothing else has to be restored.
+ */
+internal fun importMenuActions(): List<ImportMenuAction> =
+    ImportMenuAction.entries.filter { it.isVisible }
 
 enum class MainMoreMenuAction(@StringRes val labelRes: Int) {
     RestartService(R.string.title_service_restart),
@@ -60,7 +71,7 @@ internal fun serverMenuActions(
 
 @Composable
 fun ImportMenuContent(onAction: (MainAction) -> Unit) = AppDropdownMenuItems(
-    items = ImportMenuAction.entries,
+    items = importMenuActions(),
     labelRes = { it.labelRes },
     onSelected = { onAction(it.action) }
 )

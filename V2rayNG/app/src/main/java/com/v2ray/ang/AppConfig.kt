@@ -128,6 +128,8 @@ object AppConfig {
     const val GITHUB_DOWNLOAD_URL = "$GITHUB_URL/%s/releases/latest/download"
     const val ANDROID_PACKAGE_NAME_LIST_URL = "$GITHUB_RAW_URL/2dust/androidpackagenamelist/master/proxy.txt"
     const val APP_URL = "$GITHUB_URL/2dust/v2rayNG"
+    /** This fork's repository, shown by the About screen's source-code entry. */
+    const val APP_SOURCE_URL = "$GITHUB_URL/zshanhui/maweivp-android"
     const val APP_API_URL = "https://api.github.com/repos/2dust/v2rayNG/releases"
     const val APP_ISSUES_URL = "$APP_URL/issues"
     const val APP_WIKI_MODE = "$APP_URL/wiki/Mode"

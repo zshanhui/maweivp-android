@@ -108,7 +108,8 @@
     <string name="server_lab_kcp_mtu">mKCP MTU（可选，默认 1350）</string>
     <string name="server_lab_kcp_tti">mKCP TTI（可选，默认 50 毫秒）</string>
     <string name="toast_success">成功</string>
-    <string name="toast_failure">失败</string>
+        <string name="toast_import_vless_only">仅支持导入 VLESS 链接</string>
+<string name="toast_failure">失败</string>
     <string name="toast_none_data">没有数据</string>
     <string name="toast_incorrect_protocol">不正确的协议</string>
     <string name="toast_decoding_failed">解码失败</string>

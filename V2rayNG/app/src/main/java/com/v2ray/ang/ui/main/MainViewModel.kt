@@ -21,6 +21,7 @@ import com.v2ray.ang.extension.moveItem
 import com.v2ray.ang.handler.SubscriptionInfoParser
 import com.v2ray.ang.ui.base.BaseViewModel
 import com.v2ray.ang.util.LogUtil
+import com.v2ray.ang.dto.ImportBatchResult
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.CoroutineDispatcher
@@ -519,16 +520,22 @@ class MainViewModel(
         launchLoading {
             withContext(ioDispatcher) {
                 try {
-                    val (count, countSub) = dataSource.importBatchConfig(
+                    val result = dataSource.importBatchConfig(
                         configText, uiState.value.selectedGroupId, true
                     )
                     when {
-                        count > 0 -> {
-                            toast(dataSource.getString(R.string.title_import_config_count, count))
+                        result.configCount > 0 -> {
+                            toast(
+                                dataSource.getString(
+                                    R.string.title_import_config_count, result.configCount
+                                )
+                            )
                             setupGroupTab(forceRefresh = true)
                         }
 
-                        countSub > 0 -> setupGroupTab(forceRefresh = true)
+                        result.subscriptionCount > 0 -> setupGroupTab(forceRefresh = true)
+                        // Only unsupported protocols were found: say so instead of a generic failure.
+                        result.unsupportedCount > 0 -> toastError(R.string.toast_import_vless_only)
                         else -> toastError(R.string.toast_failure)
                     }
                 } catch (cancelled: CancellationException) {

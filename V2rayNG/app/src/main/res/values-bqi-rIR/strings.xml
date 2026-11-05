@@ -108,7 +108,8 @@
     <string name="server_lab_kcp_mtu">mKCP MTU (اختیاری، پؽش فرز 1350)</string>
     <string name="server_lab_kcp_tti">mKCP TTI (اختیاری، پؽش فرز 50 میلی‌سانیه)</string>
     <string name="toast_success">وا مووفقیت ٱنجوم وابی</string>
-    <string name="toast_failure">شکست خرد</string>
+        <string name="toast_import_vless_only">فقط لینکهای VLESS ایمپورت میشن</string>
+<string name="toast_failure">شکست خرد</string>
     <string name="toast_none_data">هیچ داده ای وۊجۊڌ نڌاره</string>
     <string name="toast_incorrect_protocol">پوروتوکول نادوروست</string>
     <string name="toast_decoding_failed">رزم گوشایی ٱنجوم نوابی</string>

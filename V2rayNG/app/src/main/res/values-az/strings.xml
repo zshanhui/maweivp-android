@@ -108,7 +108,8 @@
     <string name="server_lab_kcp_mtu">mKCP MTU (istəyə bağlı, standart 1350)</string>
     <string name="server_lab_kcp_tti">mKCP TTI (istəyə bağlı, standart 50 ms)</string>
     <string name="toast_success">Uğurlu</string>
-    <string name="toast_failure">Uğursuz</string>
+        <string name="toast_import_vless_only">Yalnız VLESS linklərini idxal etmək olar</string>
+<string name="toast_failure">Uğursuz</string>
     <string name="toast_none_data">Əlçatan məlumat yoxdur</string>
     <string name="toast_incorrect_protocol">Yanlış protokol</string>
     <string name="toast_decoding_failed">Dekodlaşdırma uğursuz oldu</string>

@@ -10,6 +10,7 @@ import com.v2ray.ang.extension.toastSuccess
 import com.v2ray.ang.handler.AngConfigManager
 import com.v2ray.ang.ui.base.HelperBaseComponentActivity
 import com.v2ray.ang.ui.main.MainActivity
+import com.v2ray.ang.dto.ImportBatchResult
 
 class ScScannerActivity : HelperBaseComponentActivity() {
 
@@ -27,12 +28,12 @@ class ScScannerActivity : HelperBaseComponentActivity() {
     private fun importQRcode() {
         launchQRCodeScanner { scanResult ->
             if (scanResult != null) {
-                val (count, countSub) = AngConfigManager.importBatchConfig(scanResult, "", false)
+                val result = AngConfigManager.importBatchConfig(scanResult, "", false)
 
-                if (count + countSub > 0) {
-                    toastSuccess(R.string.toast_success)
-                } else {
-                    toastError(R.string.toast_failure)
+                when {
+                    result.importedCount > 0 -> toastSuccess(R.string.toast_success)
+                    result.unsupportedCount > 0 -> toastError(R.string.toast_import_vless_only)
+                    else -> toastError(R.string.toast_failure)
                 }
 
                 startActivity(Intent(this, MainActivity::class.java))

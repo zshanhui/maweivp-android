@@ -13,6 +13,7 @@ import com.v2ray.ang.handler.AngConfigManager
 import com.v2ray.ang.ui.base.BaseComponentActivity
 import com.v2ray.ang.ui.main.MainActivity
 import com.v2ray.ang.util.LogUtil
+import com.v2ray.ang.dto.ImportBatchResult
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -76,12 +77,12 @@ class UrlSchemeActivity : BaseComponentActivity() {
             }
             LogUtil.i(AppConfig.TAG, decodedUrl)
             lifecycleScope.launch(Dispatchers.IO) {
-                val (count, countSub) = AngConfigManager.importBatchConfig(decodedUrl, "", false)
+                val result = AngConfigManager.importBatchConfig(decodedUrl, "", false)
                 withContext(Dispatchers.Main) {
-                    if (count + countSub > 0) {
-                        toast(R.string.import_subscription_success)
-                    } else {
-                        toast(R.string.import_subscription_failure)
+                    when {
+                        result.importedCount > 0 -> toast(R.string.import_subscription_success)
+                        result.unsupportedCount > 0 -> toastError(R.string.toast_import_vless_only)
+                        else -> toast(R.string.import_subscription_failure)
                     }
                 }
             }

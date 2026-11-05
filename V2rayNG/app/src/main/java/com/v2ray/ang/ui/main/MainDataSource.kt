@@ -6,6 +6,7 @@ import com.v2ray.ang.dto.entities.ProfileItem
 import com.v2ray.ang.dto.entities.ServerAffiliationInfo
 import com.v2ray.ang.dto.entities.SubscriptionCache
 import com.v2ray.ang.dto.entities.SubscriptionItem
+import com.v2ray.ang.dto.ImportBatchResult
 import kotlinx.coroutines.flow.Flow
 import java.io.Closeable
 
@@ -47,7 +48,7 @@ interface MainDataSource : Closeable {
         server: String?,
         subscriptionId: String,
         updateUI: Boolean
-    ): Pair<Int, Int>
+    ): ImportBatchResult
 
     fun updateConfigViaSubAll(): SubscriptionUpdateResult
     fun updateConfigViaSub(subscriptionCache: SubscriptionCache): SubscriptionUpdateResult

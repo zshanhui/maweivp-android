@@ -108,7 +108,8 @@
     <string name="server_lab_kcp_mtu">mKCP MTU (اختياري، الافتراضي 1350)</string>
     <string name="server_lab_kcp_tti">mKCP TTI (اختياري، الافتراضي 50 مللي ثانية)</string>
     <string name="toast_success">نجاح</string>
-    <string name="toast_failure">فشل</string>
+        <string name="toast_import_vless_only">يتم استيراد روابط VLESS فقط</string>
+<string name="toast_failure">فشل</string>
     <string name="toast_none_data">لا يوجد شيء</string>
     <string name="toast_incorrect_protocol">بروتوكول غير صحيح</string>
     <string name="toast_decoding_failed">فشل فك التشفير</string>

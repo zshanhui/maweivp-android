@@ -108,7 +108,8 @@
     <string name="server_lab_kcp_mtu">mKCP MTU (اختیاری، پیش‌فرض 1350)</string>
     <string name="server_lab_kcp_tti">mKCP TTI (اختیاری، پیش‌فرض 50 میلی‌ثانیه)</string>
     <string name="toast_success">موفقیت‌آمیز</string>
-    <string name="toast_failure">شکست!</string>
+        <string name="toast_import_vless_only">فقط پیوندهای VLESS وارد میشوند</string>
+<string name="toast_failure">شکست!</string>
     <string name="toast_none_data">داده‌ای یافت نشد</string>
     <string name="toast_incorrect_protocol">پروتکل نادرست</string>
     <string name="toast_decoding_failed">رمزگشایی انجام نشد</string>

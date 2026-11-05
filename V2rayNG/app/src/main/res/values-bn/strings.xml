@@ -108,7 +108,8 @@
     <string name="server_lab_kcp_mtu">mKCP MTU (ঐচ্ছিক, ডিফল্ট 1350)</string>
     <string name="server_lab_kcp_tti">mKCP TTI (ঐচ্ছিক, ডিফল্ট 50 মিলিসেকেন্ড)</string>
     <string name="toast_success">সফল</string>
-    <string name="toast_failure">ব্যর্থ</string>
+        <string name="toast_import_vless_only">শুধুমাত্র VLESS লিঙ্ক আমদানি করা যায়</string>
+<string name="toast_failure">ব্যর্থ</string>
     <string name="toast_none_data">কোনও তথ্য নেই</string>
     <string name="toast_incorrect_protocol">ভুল প্রোটোকল</string>
     <string name="toast_decoding_failed">ডিকোডিং ব্যর্থ</string>

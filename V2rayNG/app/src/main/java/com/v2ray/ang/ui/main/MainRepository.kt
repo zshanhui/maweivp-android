@@ -9,6 +9,7 @@ import com.v2ray.ang.AngApplication
 import com.v2ray.ang.AppConfig
 import com.v2ray.ang.R
 import com.v2ray.ang.dto.ConnectionTestResult
+import com.v2ray.ang.dto.ImportBatchResult
 import com.v2ray.ang.dto.RealPingResult
 import com.v2ray.ang.dto.SubscriptionUpdateResult
 import com.v2ray.ang.dto.TestServiceMessage
@@ -190,7 +191,7 @@ class MainRepository(
         server: String?,
         subscriptionId: String,
         updateUI: Boolean
-    ): Pair<Int, Int> = AngConfigManager.importBatchConfig(server, subscriptionId, updateUI)
+    ): ImportBatchResult = AngConfigManager.importBatchConfig(server, subscriptionId, updateUI)
 
     override fun updateConfigViaSubAll(): SubscriptionUpdateResult =
         AngConfigManager.updateConfigViaSubAll()

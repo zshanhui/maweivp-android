@@ -27,6 +27,7 @@ import com.v2ray.ang.util.JsonUtil
 import com.v2ray.ang.util.LogUtil
 import com.v2ray.ang.util.QRCodeDecoder
 import com.v2ray.ang.util.Utils
+import com.v2ray.ang.dto.ImportBatchResult
 import okhttp3.Headers
 import java.net.URI
 
@@ -174,21 +175,22 @@ object AngConfigManager {
     }
 
     /**
-     * Imports a batch of configurations.
+     * Imports a batch of configurations from text the user supplied (QR scan, clipboard, shared
+     * link, deep link).
+     *
+     * This build imports VLESS profiles only: other protocols parse but are dropped and reported
+     * through [ImportBatchResult.unsupportedCount] so the caller can explain why nothing appeared.
      *
      * @param server The server string.
      * @param subid The subscription ID.
      * @param append Whether to append the configurations.
-     * @return A pair containing the number of configurations and subscriptions imported.
+     * @return The number of configurations and subscriptions imported, plus rejected profiles.
      */
-    fun importBatchConfig(server: String?, subid: String, append: Boolean): Pair<Int, Int> {
+    fun importBatchConfig(server: String?, subid: String, append: Boolean): ImportBatchResult {
         return try {
-            var count = parseBatchConfig(Utils.decode(server), subid, append)
-            if (count <= 0) {
-                count = parseBatchConfig(server, subid, append)
-            }
-            if (count <= 0) {
-                count = parseCustomConfigServer(server, subid, append)
+            var counts = parseBatchConfig(Utils.decode(server), subid, append, SUPPORTED_IMPORT_TYPES)
+            if (counts.imported <= 0 && counts.rejected <= 0) {
+                counts = parseBatchConfig(server, subid, append, SUPPORTED_IMPORT_TYPES)
             }
 
             var countSub = parseBatchSubscription(server)
@@ -199,10 +201,14 @@ object AngConfigManager {
                 updateConfigViaSubAll()
             }
 
-            count to countSub
+            ImportBatchResult(
+                configCount = counts.imported,
+                subscriptionCount = countSub,
+                unsupportedCount = counts.rejected,
+            )
         } catch (e: ProfileStorageException) {
             LogUtil.e(AppConfig.TAG, "Failed to store imported profiles", e)
-            0 to 0
+            ImportBatchResult()
         }
     }
 
@@ -241,10 +247,15 @@ object AngConfigManager {
      * @param append Whether to append the configurations.
      * @return The number of configurations parsed.
      */
-    private fun parseBatchConfig(servers: String?, subid: String, append: Boolean): Int {
+    private fun parseBatchConfig(
+        servers: String?,
+        subid: String,
+        append: Boolean,
+        supportedTypes: Set<EConfigType>? = null,
+    ): ParseCounts {
         try {
             if (servers == null) {
-                return 0
+                return ParseCounts()
             }
             val subItem = MmkvManager.decodeSubscription(subid)
 
@@ -267,23 +278,23 @@ object AngConfigManager {
                 }
 
             val v2raynConfigs = V2rayNFmt.parse(v2raynLines, subid)
-            val allConfigs = v2raynConfigs + configs
+            val (accepted, rejected) = partitionBySupportedTypes(v2raynConfigs + configs, supportedTypes)
 
-            if (allConfigs.isNotEmpty()) {
+            if (accepted.isNotEmpty()) {
                 commitProfiles(
-                    configs = allConfigs.map(::ParsedProfile),
+                    configs = accepted.map(::ParsedProfile),
                     subid = subid,
                     append = append,
                 )
             }
 
-            return allConfigs.size
+            return ParseCounts(imported = accepted.size, rejected = rejected)
         } catch (e: ProfileStorageException) {
             throw e
         } catch (e: Exception) {
             LogUtil.e(AppConfig.TAG, "Failed to parse batch config", e)
         }
-        return 0
+        return ParseCounts()
     }
 
     /**
@@ -603,9 +614,10 @@ object AngConfigManager {
      * @return The number of configurations parsed.
      */
     private fun parseConfigViaSub(server: String?, subid: String, append: Boolean): Int {
-        var count = parseBatchConfig(Utils.decode(server), subid, append)
+        // Subscriptions are not restricted to VLESS: their contents stay under the panel's control.
+        var count = parseBatchConfig(Utils.decode(server), subid, append).imported
         if (count <= 0) {
-            count = parseBatchConfig(server, subid, append)
+            count = parseBatchConfig(server, subid, append).imported
         }
         if (count <= 0) {
             count = parseCustomConfigServer(server, subid, append)
@@ -634,6 +646,12 @@ object AngConfigManager {
         return 1
     }
 
+    /** Parse outcome before profiles are committed. */
+    private data class ParseCounts(val imported: Int = 0, val rejected: Int = 0)
+
+    /** Imported through user-supplied text only; subscriptions are unaffected. */
+    private val SUPPORTED_IMPORT_TYPES = setOf(EConfigType.VLESS)
+
     /** Generates a description for the profile.
      *
      * @param profile The profile item.
@@ -654,4 +672,19 @@ object AngConfigManager {
 
         return "$addrPart : ${port ?: ""}"
     }
+}
+
+/**
+ * Splits parsed profiles into the ones this build imports and a count of the ones it rejects.
+ *
+ * A null [supportedTypes] accepts everything, which is what subscription updates use; user-supplied
+ * text passes an explicit set so unsupported protocols can be reported instead of silently ignored.
+ */
+internal fun partitionBySupportedTypes(
+    configs: List<ProfileItem>,
+    supportedTypes: Set<EConfigType>?,
+): Pair<List<ProfileItem>, Int> {
+    if (supportedTypes == null) return configs to 0
+    val accepted = configs.filter { it.configType in supportedTypes }
+    return accepted to (configs.size - accepted.size)
 }

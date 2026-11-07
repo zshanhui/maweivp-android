@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name" translatable="false">v2rayNG</string>
+    <string name="app_name" translatable="false">MaweiVP</string>
     <string name="drawer_app_name" translatable="false">MaweiVP</string>
     <string name="app_widget_name">開關</string>
     <string name="app_tile_name">開關</string>
@@ -15,7 +15,7 @@
     <string name="pull_down_to_refresh">請下拉重新整理！</string>
 
     <!-- Notifications -->
-    <string name="notification_channel_service">v2rayNG 服務</string>
+    <string name="notification_channel_service">MaweiVP 服務</string>
     <string name="notification_channel_subscription_updates">訂閱更新</string>
     <string name="notification_channel_connection_checks">連線檢查</string>
     <string name="notification_action_stop_v2ray">停止</string>
@@ -108,8 +108,8 @@
     <string name="server_lab_kcp_mtu">mKCP MTU（可選，預設 1350）</string>
     <string name="server_lab_kcp_tti">mKCP TTI（可選，預設 50 毫秒）</string>
     <string name="toast_success">成功</string>
-        <string name="toast_import_vless_only">僅支援匯入 VLESS 連結</string>
-<string name="toast_failure">失敗</string>
+    <string name="toast_import_vless_only">僅支援匯入 VLESS 連結</string>
+    <string name="toast_failure">失敗</string>
     <string name="toast_none_data">無資料</string>
     <string name="toast_incorrect_protocol">通訊協定不正確</string>
     <string name="toast_decoding_failed">解碼失敗</string>
@@ -138,7 +138,7 @@
     <string name="server_lab_pinned_ca256">憑證指紋 (SHA-256)</string>
     <string name="server_lab_browser_dialer">啟用 Browser Dialer</string>
     <string name="server_lab_browser_dialer_tip">僅支援 xhttp (packet-up) 和 ws 出站；與 TLS 相關的設定可能會被忽略或發生衝突</string>
-    <string name="toast_allow_insecure_deprecated">目前節點使用未加密連線，您的通訊可能會被威權政府掌控的網路中間設施直接查看\n為了安全，此類節點無法使用 26.2.6+ 版本的 Xray 核心連線\n如果是自建節點，請啟用 TLS 等安全加密，或固定憑證 pinnedCA256\n如果是服務供應商的節點，請聯絡供應商完成技術升級。若供應商拒絕配合，建議改用更重視使用者安全的供應商\n如需更多資訊，請造訪 https://github.com/2dust/v2rayN/discussions/9460</string>
+    <string name="toast_allow_insecure_deprecated">目前節點使用未加密連線，您的通訊可能會被威權政府掌控的網路中間設施直接查看\n為了安全，此類節點無法使用 26.2.6+ 版本的 Xray 核心連線\n如果是自建節點，請啟用 TLS 等安全加密，或固定憑證 pinnedCA256\n如果是服務供應商的節點，請聯絡供應商完成技術升級。若供應商拒絕配合，建議改用更重視使用者安全的供應商\n如需更多資訊，請造訪 https://github.com/zshanhui/maweivp-android</string>
     <string name="pinned_ca256_action_fetch">取得憑證指紋</string>
     <string name="toast_fetch_cert_sha256_success">已成功取得憑證指紋</string>
     <string name="toast_fetch_cert_sha256_failed">無法取得憑證指紋</string>

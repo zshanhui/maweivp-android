@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name" translatable="false">v2rayNG</string>
+    <string name="app_name" translatable="false">MaweiVP</string>
     <string name="drawer_app_name" translatable="false">MaweiVP</string>
     <string name="app_widget_name">Keçid</string>
     <string name="app_tile_name">Keçid</string>
@@ -15,7 +15,7 @@
     <string name="pull_down_to_refresh">Yeniləmək üçün aşağı çəkin!</string>
 
     <!-- Notifications -->
-    <string name="notification_channel_service">v2rayNG xidməti</string>
+    <string name="notification_channel_service">MaweiVP xidməti</string>
     <string name="notification_channel_subscription_updates">Abunəlik yenilənmələri</string>
     <string name="notification_channel_connection_checks">Bağlantı yoxlamaları</string>
     <string name="notification_action_stop_v2ray">Dayandır</string>
@@ -108,8 +108,8 @@
     <string name="server_lab_kcp_mtu">mKCP MTU (istəyə bağlı, standart 1350)</string>
     <string name="server_lab_kcp_tti">mKCP TTI (istəyə bağlı, standart 50 ms)</string>
     <string name="toast_success">Uğurlu</string>
-        <string name="toast_import_vless_only">Yalnız VLESS linklərini idxal etmək olar</string>
-<string name="toast_failure">Uğursuz</string>
+    <string name="toast_import_vless_only">Yalnız VLESS linklərini idxal etmək olar</string>
+    <string name="toast_failure">Uğursuz</string>
     <string name="toast_none_data">Əlçatan məlumat yoxdur</string>
     <string name="toast_incorrect_protocol">Yanlış protokol</string>
     <string name="toast_decoding_failed">Dekodlaşdırma uğursuz oldu</string>
@@ -138,7 +138,7 @@
     <string name="server_lab_pinned_ca256">Sertifikatın barmaq izi (SHA-256)</string>
     <string name="server_lab_browser_dialer">Brauzer Yığcısını aktivləşdirin</string>
     <string name="server_lab_browser_dialer_tip">Yalnız xhttp (packet-up) və ws çıxışlarını dəstəkləyir; TLS ilə bağlı tənzimləmələr nəzərə alınmaya və ya ziddiyyət təşkil edə bilər</string>
-    <string name="toast_allow_insecure_deprecated">Cari düyün şifrələnməmiş bağlantı istifadə edir. Ünsiyyətiniz avtoritar hökumətlər tərəfindən idarə olunan şəbəkə vasitəçiləri tərəfindən birbaşa izlənilə bilər.\nTəhlükəsizlik səbəbiylə, bu tür düyünlərə Xray core 26.2.6+ versiyası ilə qoşulmaq mümkün deyil.\nƏgər bu özünüzün yaratdığı düyündürsə, xahiş olunur TLS kimi təhlükəsizlik şifrələməsini aktivləşdirin və ya pinnedCA256 sertifikatını bərkidib istifadə edin.\nƏgər bu xidmət təminatçısının düyünüdürsə, texniki yenilənməni tamamlamaq üçün xidmət təminatçısı ilə əlaqə saxlayın. Xidmət təminatçısı əməkdaşlıq etməkdən imtina edərsə, istifadəçi təhlükəsizliyinə daha çox önəm verən başqa bir provayderə keçməyiniz tövsiyə olunur.\nƏtraflı məlumat üçün https://github.com/2dust/v2rayN/discussions/9460 ünvanına daxil olun</string>
+    <string name="toast_allow_insecure_deprecated">Cari düyün şifrələnməmiş bağlantı istifadə edir. Ünsiyyətiniz avtoritar hökumətlər tərəfindən idarə olunan şəbəkə vasitəçiləri tərəfindən birbaşa izlənilə bilər.\nTəhlükəsizlik səbəbiylə, bu tür düyünlərə Xray core 26.2.6+ versiyası ilə qoşulmaq mümkün deyil.\nƏgər bu özünüzün yaratdığı düyündürsə, xahiş olunur TLS kimi təhlükəsizlik şifrələməsini aktivləşdirin və ya pinnedCA256 sertifikatını bərkidib istifadə edin.\nƏgər bu xidmət təminatçısının düyünüdürsə, texniki yenilənməni tamamlamaq üçün xidmət təminatçısı ilə əlaqə saxlayın. Xidmət təminatçısı əməkdaşlıq etməkdən imtina edərsə, istifadəçi təhlükəsizliyinə daha çox önəm verən başqa bir provayderə keçməyiniz tövsiyə olunur.\nƏtraflı məlumat üçün https://github.com/zshanhui/maweivp-android ünvanına daxil olun</string>
     <string name="pinned_ca256_action_fetch">Sertifikatın barmaq izini əldə et</string>
     <string name="toast_fetch_cert_sha256_success">Sertifikatın barmaq izi uğurla əldə edildi</string>
     <string name="toast_fetch_cert_sha256_failed">Sertifikatın barmaq izini əldə etmək mümkün olmadı</string>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name" translatable="false">v2rayNG</string>
+    <string name="app_name" translatable="false">MaweiVP</string>
     <string name="drawer_app_name" translatable="false">MaweiVP</string>
     <string name="app_widget_name">التبديل</string>
     <string name="app_tile_name">التبديل</string>
@@ -15,7 +15,7 @@
     <string name="pull_down_to_refresh">اسحب لأسفل للتحديث!</string>
 
     <!-- Notifications -->
-    <string name="notification_channel_service">خدمة v2rayNG</string>
+    <string name="notification_channel_service">خدمة MaweiVP</string>
     <string name="notification_channel_subscription_updates">تحديثات الاشتراكات</string>
     <string name="notification_channel_connection_checks">فحوص الاتصال</string>
     <string name="notification_action_stop_v2ray">إيقاف</string>
@@ -108,8 +108,8 @@
     <string name="server_lab_kcp_mtu">mKCP MTU (اختياري، الافتراضي 1350)</string>
     <string name="server_lab_kcp_tti">mKCP TTI (اختياري، الافتراضي 50 مللي ثانية)</string>
     <string name="toast_success">نجاح</string>
-        <string name="toast_import_vless_only">يتم استيراد روابط VLESS فقط</string>
-<string name="toast_failure">فشل</string>
+    <string name="toast_import_vless_only">يتم استيراد روابط VLESS فقط</string>
+    <string name="toast_failure">فشل</string>
     <string name="toast_none_data">لا يوجد شيء</string>
     <string name="toast_incorrect_protocol">بروتوكول غير صحيح</string>
     <string name="toast_decoding_failed">فشل فك التشفير</string>
@@ -138,7 +138,7 @@
     <string name="server_lab_pinned_ca256">بصمة الشهادة (SHA-256)</string>
     <string name="server_lab_browser_dialer">تمكين Browser Dialer</string>
     <string name="server_lab_browser_dialer_tip">يدعم فقط اتصالات xhttp (packet-up) وws الصادرة؛ قد يتم تجاهل الإعدادات المتعلقة بـ TLS أو قد تتعارض</string>
-    <string name="toast_allow_insecure_deprecated">تستخدم العقدة الحالية اتصالاً غير مشفر. قد تتمكن تجهيزات الشبكة الوسيطة الخاضعة لسيطرة حكومات استبدادية من الاطلاع مباشرةً على اتصالاتك.\nلأسباب أمنية، لا يمكن الاتصال بهذه العقد عبر نواة Xray الإصدار 26.2.6 أو أحدث.\nإذا كانت العقدة من إعدادك، ففعّل تشفيراً آمناً مثل TLS أو ثبّت بصمة الشهادة pinnedCA256.\nإذا كانت العقدة تابعة لمزوّد خدمة، فتواصل معه لإكمال الترقية التقنية. إذا رفض المزوّد التعاون، فنوصي بالانتقال إلى مزوّد يهتم أكثر بأمان المستخدمين.\nلمزيد من المعلومات، تفضل بزيارة https://github.com/2dust/v2rayN/discussions/9460</string>
+    <string name="toast_allow_insecure_deprecated">تستخدم العقدة الحالية اتصالاً غير مشفر. قد تتمكن تجهيزات الشبكة الوسيطة الخاضعة لسيطرة حكومات استبدادية من الاطلاع مباشرةً على اتصالاتك.\nلأسباب أمنية، لا يمكن الاتصال بهذه العقد عبر نواة Xray الإصدار 26.2.6 أو أحدث.\nإذا كانت العقدة من إعدادك، ففعّل تشفيراً آمناً مثل TLS أو ثبّت بصمة الشهادة pinnedCA256.\nإذا كانت العقدة تابعة لمزوّد خدمة، فتواصل معه لإكمال الترقية التقنية. إذا رفض المزوّد التعاون، فنوصي بالانتقال إلى مزوّد يهتم أكثر بأمان المستخدمين.\nلمزيد من المعلومات، تفضل بزيارة https://github.com/zshanhui/maweivp-android</string>
     <string name="pinned_ca256_action_fetch">جلب بصمة الشهادة</string>
     <string name="toast_fetch_cert_sha256_success">تم جلب بصمة الشهادة بنجاح</string>
     <string name="toast_fetch_cert_sha256_failed">فشل جلب بصمة الشهادة</string>

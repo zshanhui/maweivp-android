@@ -3,9 +3,9 @@ name: Validate Fastlane metadata
 on:
   workflow_dispatch:
   push:
-      branches: [ "master" ]
+      branches: [ "master", "maweivp-modifications" ]
   pull_request:
-      branches: [ "master" ]
+      branches: [ "maweivp-modifications" ]
 
 jobs:
   go:

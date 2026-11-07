@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name" translatable="false">v2rayNG</string>
+    <string name="app_name" translatable="false">MaweiVP</string>
     <string name="drawer_app_name" translatable="false">MaweiVP</string>
     <string name="app_widget_name">تعویض</string>
     <string name="app_tile_name">تعویض</string>
@@ -15,7 +15,7 @@
     <string name="pull_down_to_refresh">برای بروزرسانی، صفحه را به پایین بکشید!</string>
 
     <!-- Notifications -->
-    <string name="notification_channel_service">سرویس v2rayNG</string>
+    <string name="notification_channel_service">سرویس MaweiVP</string>
     <string name="notification_channel_subscription_updates">به‌روزرسانی اشتراک‌ها</string>
     <string name="notification_channel_connection_checks">بررسی اتصال</string>
     <string name="notification_action_stop_v2ray">توقف</string>
@@ -108,8 +108,8 @@
     <string name="server_lab_kcp_mtu">mKCP MTU (اختیاری، پیش‌فرض 1350)</string>
     <string name="server_lab_kcp_tti">mKCP TTI (اختیاری، پیش‌فرض 50 میلی‌ثانیه)</string>
     <string name="toast_success">موفقیت‌آمیز</string>
-        <string name="toast_import_vless_only">فقط پیوندهای VLESS وارد میشوند</string>
-<string name="toast_failure">شکست!</string>
+    <string name="toast_import_vless_only">فقط پیوندهای VLESS وارد میشوند</string>
+    <string name="toast_failure">شکست!</string>
     <string name="toast_none_data">داده‌ای یافت نشد</string>
     <string name="toast_incorrect_protocol">پروتکل نادرست</string>
     <string name="toast_decoding_failed">رمزگشایی انجام نشد</string>
@@ -138,7 +138,7 @@
     <string name="server_lab_pinned_ca256">اثر انگشت گواهی (SHA-256)</string>
     <string name="server_lab_browser_dialer">فعال‌سازی Browser Dialer</string>
     <string name="server_lab_browser_dialer_tip">فقط خروجی‌های xhttp (packet-up) و ws پشتیبانی می‌شوند؛ تنظیمات مرتبط با TLS ممکن است نادیده گرفته شوند یا تداخل داشته باشند</string>
-    <string name="toast_allow_insecure_deprecated">گره فعلی از اتصال رمزنگاری‌نشده استفاده می‌کند. زیرساخت‌های واسط شبکه که در کنترل حکومت‌های اقتدارگرا هستند ممکن است ارتباطات شما را مستقیماً مشاهده کنند.\nبه‌دلایل امنیتی، اتصال به چنین گره‌هایی با هسته Xray نسخه 26.2.6 و بالاتر امکان‌پذیر نیست.\nاگر گره را خودتان راه‌اندازی کرده‌اید، رمزنگاری امنی مانند TLS را فعال کنید یا اثر انگشت گواهی pinnedCA256 را پین کنید.\nاگر گره متعلق به ارائه‌دهنده خدمات است، برای ارتقای فنی با آن‌ها تماس بگیرید. اگر ارائه‌دهنده همکاری نمی‌کند، توصیه می‌شود به ارائه‌دهنده‌ای بروید که برای امنیت کاربران اهمیت بیشتری قائل است.\nبرای اطلاعات بیشتر به https://github.com/2dust/v2rayN/discussions/9460 مراجعه کنید</string>
+    <string name="toast_allow_insecure_deprecated">گره فعلی از اتصال رمزنگاری‌نشده استفاده می‌کند. زیرساخت‌های واسط شبکه که در کنترل حکومت‌های اقتدارگرا هستند ممکن است ارتباطات شما را مستقیماً مشاهده کنند.\nبه‌دلایل امنیتی، اتصال به چنین گره‌هایی با هسته Xray نسخه 26.2.6 و بالاتر امکان‌پذیر نیست.\nاگر گره را خودتان راه‌اندازی کرده‌اید، رمزنگاری امنی مانند TLS را فعال کنید یا اثر انگشت گواهی pinnedCA256 را پین کنید.\nاگر گره متعلق به ارائه‌دهنده خدمات است، برای ارتقای فنی با آن‌ها تماس بگیرید. اگر ارائه‌دهنده همکاری نمی‌کند، توصیه می‌شود به ارائه‌دهنده‌ای بروید که برای امنیت کاربران اهمیت بیشتری قائل است.\nبرای اطلاعات بیشتر به https://github.com/zshanhui/maweivp-android مراجعه کنید</string>
     <string name="pinned_ca256_action_fetch">دریافت اثر انگشت گواهی</string>
     <string name="toast_fetch_cert_sha256_success">اثر انگشت گواهی با موفقیت دریافت شد</string>
     <string name="toast_fetch_cert_sha256_failed">دریافت اثر انگشت گواهی ناموفق بود</string>

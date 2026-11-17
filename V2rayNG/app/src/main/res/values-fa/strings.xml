@@ -295,7 +295,6 @@
     <string name="title_translators">مترجمان</string>
     <string name="title_tg_channel">کانال تلگرام</string>
 
-    <string name="title_pref_promotion">تبلیغات</string>
 
     <string name="title_pref_auto_update_subscription">به‌ روزرسانی خودکار اشتراک ها</string>
     <string name="summary_pref_auto_update_subscription">اشتراک های خود را به طور خودکار با فاصله زمانی در پس زمینه به روز کنید. بسته به دستگاه، این ویژگی ممکن است همیشه کار نکند.</string>
@@ -565,5 +564,23 @@
     <string name="sub_info_open_support">باز کردن لینک پشتیبانی</string>
     <string name="sub_info_open_page">باز کردن صفحه اطلاعات اشتراک</string>
     <string name="sub_info_unlimited">نامحدود</string>
+
+    <string name="block_sites_title">Blocked sites</string>
+    <string name="block_sites_switch_title">Block these sites</string>
+    <string name="block_sites_summary">Sites blocked: %d. Applies to every app; changes take effect when the connection restarts.</string>
+    <string name="block_sites_add">Add sites</string>
+    <string name="block_sites_add_title">Add sites</string>
+    <string name="block_sites_add_hint">One domain per line: reddit.com or example.* (any TLD). Subdomains are included.</string>
+    <string name="block_sites_empty">No sites blocked yet</string>
+    <string name="block_sites_remove">Remove %s</string>
+    <string name="block_sites_added">%d sites added</string>
+    <string name="block_sites_rejected">%d entries were not a valid domain</string>
+    <string name="block_sites_remove_title">Remove site</string>
+    <string name="block_sites_remove_message">%s will no longer be blocked.</string>
+    <string name="action_remove">Remove</string>
+    <string name="block_sites_disable_title">Turn off blocking?</string>
+    <string name="block_sites_disable_message">The %d sites in the list will be reachable again.</string>
+    <string name="block_sites_disable_action">Turn off</string>
+    <string name="block_sites_unchanged">These sites are already blocked</string>
 
 </resources>

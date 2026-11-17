@@ -10,6 +10,7 @@ import com.v2ray.ang.enums.EConfigType
 import com.v2ray.ang.extension.isComplexType
 import com.v2ray.ang.extension.isNotNullEmpty
 import com.v2ray.ang.handler.MmkvManager
+import com.v2ray.ang.handler.block.BlockRuleProvider
 import com.v2ray.ang.handler.SettingsManager
 import com.v2ray.ang.util.LogUtil
 import com.v2ray.ang.util.Utils
@@ -226,7 +227,7 @@ object CoreConfigContextBuilder {
      * outbounds are normalized into three tags only: proxy / direct / block.
      */
     private fun collectRoutingDomainRulesForDns(): List<CoreConfigContext.RoutingDomainRule> {
-        val rulesetItems = MmkvManager.decodeRoutingRulesets() ?: return emptyList()
+        val rulesetItems = BlockRuleProvider.effectiveRulesets()
         val result = mutableListOf<CoreConfigContext.RoutingDomainRule>()
 
         rulesetItems

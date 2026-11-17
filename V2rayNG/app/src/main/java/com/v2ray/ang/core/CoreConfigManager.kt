@@ -15,6 +15,7 @@ import com.v2ray.ang.enums.CoreResolvedType
 import com.v2ray.ang.enums.EConfigType
 import com.v2ray.ang.extension.isNotNullEmpty
 import com.v2ray.ang.handler.MmkvManager
+import com.v2ray.ang.handler.block.BlockRuleProvider
 import com.v2ray.ang.handler.SettingsManager
 import com.v2ray.ang.util.HttpUtil
 import com.v2ray.ang.util.JsonUtil
@@ -1174,8 +1175,8 @@ object CoreConfigManager {
             MmkvManager.decodeSettingsString(AppConfig.PREF_ROUTING_DOMAIN_STRATEGY)
                 ?: "AsIs"
 
-        val rulesetItems = MmkvManager.decodeRoutingRulesets()
-        rulesetItems?.forEach { key ->
+        val rulesetItems = BlockRuleProvider.effectiveRulesets()
+        rulesetItems.forEach { key ->
             appendRoutingUserRule(configContext, key, v2rayConfig, policyGroupBalancerTags)
         }
     }

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- MaweiVP mark: an italic serif "M". Slant is built into the stems (15 degrees) while the serifs
+     stay horizontal, so it reads as a drawn italic rather than a sheared upright. Coordinates live
+     in the 108x108 adaptive-icon viewport and drive every raster asset as well.
+     White on the container red (@color/brand_red). -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:pathData="M26.61,74.75 L35.11,74.75 L45.89,34.50 L37.39,34.50 Z" />
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:pathData="M62.11,74.75 L70.61,74.75 L81.39,34.50 L72.89,34.50 Z" />
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:pathData="M32.79,34.50 L46.89,34.50 L46.89,38.00 L32.79,38.00 Z" />
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:pathData="M71.89,34.50 L85.99,34.50 L85.99,38.00 L71.89,38.00 Z" />
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:pathData="M22.01,71.25 L36.61,71.25 L36.61,74.75 L22.01,74.75 Z" />
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:pathData="M60.61,71.25 L75.21,71.25 L75.21,74.75 L60.61,74.75 Z" />
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:pathData="M45.89,34.50 L54.89,34.50 L49.21,65.85 L48.01,65.85 Z" />
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:pathData="M72.89,34.50 L63.89,34.50 L48.01,65.85 L49.21,65.85 Z" />
+</vector>

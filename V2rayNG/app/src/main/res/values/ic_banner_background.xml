@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="ic_banner_background">#FFFFFF</color>
+    <!-- Container red, same value as the port theme background: TV banner. -->
+    <color name="ic_banner_background">@color/brand_red</color>
 </resources>

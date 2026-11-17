@@ -138,7 +138,6 @@ object AppConfig {
     const val APP_ISSUES_URL = "$APP_URL/issues"
     const val APP_WIKI_MODE = "$APP_URL/wiki/Mode"
     const val APP_PRIVACY_POLICY = "$GITHUB_RAW_URL/zshanhui/maweivp-android/$FORK_BRANCH/CR.md"
-    const val APP_PROMOTION_URL = "aHR0cHM6Ly85LjIzNDQ1Ni54eXovYWJjLmh0bWw="
 
     /**
      * Disabled until MaweiVP has a channel of its own: empty means "no link", which is

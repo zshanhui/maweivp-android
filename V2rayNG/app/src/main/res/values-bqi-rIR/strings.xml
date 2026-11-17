@@ -295,7 +295,6 @@
     <string name="title_translators">ولرنی کارووݩ</string>
     <string name="title_tg_channel">تورگه تلگرام</string>
 
-    <string name="title_pref_promotion">تبلیقات</string>
 
     <string name="title_pref_auto_update_subscription">ورۊ کردن خوتکار اشتراکا</string>
     <string name="summary_pref_auto_update_subscription">اشتراکا خوتووݩ ن و تۉر خوتکار وا فاسله زمۊوی من پس زمینه ورۊ کۊنین. ای ویژیی من پوی دسگایل گاشڌ هی کار نکونه</string>
@@ -565,5 +564,23 @@
     <string name="sub_info_open_support">واز کردن لینگ پشتیوانی</string>
     <string name="sub_info_open_page">واز کردن صفحه اطلاعات اشتراک</string>
     <string name="sub_info_unlimited">بی‌حد</string>
+
+    <string name="block_sites_title">Blocked sites</string>
+    <string name="block_sites_switch_title">Block these sites</string>
+    <string name="block_sites_summary">Sites blocked: %d. Applies to every app; changes take effect when the connection restarts.</string>
+    <string name="block_sites_add">Add sites</string>
+    <string name="block_sites_add_title">Add sites</string>
+    <string name="block_sites_add_hint">One domain per line: reddit.com or example.* (any TLD). Subdomains are included.</string>
+    <string name="block_sites_empty">No sites blocked yet</string>
+    <string name="block_sites_remove">Remove %s</string>
+    <string name="block_sites_added">%d sites added</string>
+    <string name="block_sites_rejected">%d entries were not a valid domain</string>
+    <string name="block_sites_remove_title">Remove site</string>
+    <string name="block_sites_remove_message">%s will no longer be blocked.</string>
+    <string name="action_remove">Remove</string>
+    <string name="block_sites_disable_title">Turn off blocking?</string>
+    <string name="block_sites_disable_message">The %d sites in the list will be reachable again.</string>
+    <string name="block_sites_disable_action">Turn off</string>
+    <string name="block_sites_unchanged">These sites are already blocked</string>
 
 </resources>

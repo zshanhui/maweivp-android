@@ -295,7 +295,6 @@
     <string name="title_translators">Переводчики</string>
     <string name="title_tg_channel">Telegram-канал</string>
 
-    <string name="title_pref_promotion">Предложения</string>
 
     <string name="title_pref_auto_update_subscription">Автоматически обновлять подписки</string>
     <string name="summary_pref_auto_update_subscription">Автоматическое обновление подписок в фоновом режиме с указанным интервалом. В зависимости от устройства эта функция может работать не всегда.</string>
@@ -569,5 +568,23 @@
     <string name="sub_info_open_support">Открыть ссылку поддержки</string>
     <string name="sub_info_open_page">Открыть страницу подписки</string>
     <string name="sub_info_unlimited">Без ограничений</string>
+
+    <string name="block_sites_title">Blocked sites</string>
+    <string name="block_sites_switch_title">Block these sites</string>
+    <string name="block_sites_summary">Sites blocked: %d. Applies to every app; changes take effect when the connection restarts.</string>
+    <string name="block_sites_add">Add sites</string>
+    <string name="block_sites_add_title">Add sites</string>
+    <string name="block_sites_add_hint">One domain per line: reddit.com or example.* (any TLD). Subdomains are included.</string>
+    <string name="block_sites_empty">No sites blocked yet</string>
+    <string name="block_sites_remove">Remove %s</string>
+    <string name="block_sites_added">%d sites added</string>
+    <string name="block_sites_rejected">%d entries were not a valid domain</string>
+    <string name="block_sites_remove_title">Remove site</string>
+    <string name="block_sites_remove_message">%s will no longer be blocked.</string>
+    <string name="action_remove">Remove</string>
+    <string name="block_sites_disable_title">Turn off blocking?</string>
+    <string name="block_sites_disable_message">The %d sites in the list will be reachable again.</string>
+    <string name="block_sites_disable_action">Turn off</string>
+    <string name="block_sites_unchanged">These sites are already blocked</string>
 
 </resources>

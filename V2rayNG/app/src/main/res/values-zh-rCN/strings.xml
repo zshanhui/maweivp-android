@@ -295,7 +295,6 @@
     <string name="title_translators">翻译贡献者</string>
     <string name="title_tg_channel">Telegram 频道</string>
 
-    <string name="title_pref_promotion">推广</string>
 
     <string name="title_pref_auto_update_subscription">自动更新订阅</string>
     <string name="summary_pref_auto_update_subscription">在后台按一定时间间隔自动更新您的订阅。受设备影响，此功能不一定总是有效</string>
@@ -563,5 +562,23 @@
     <string name="sub_info_open_support">打开支持链接</string>
     <string name="sub_info_open_page">打开订阅信息页面</string>
     <string name="sub_info_unlimited">无限制</string>
+
+    <string name="block_sites_title">已屏蔽的网站</string>
+    <string name="block_sites_switch_title">屏蔽这些网站</string>
+    <string name="block_sites_summary">已屏蔽 %d 个网站。对所有应用生效；连接重启后生效。</string>
+    <string name="block_sites_add">添加网站</string>
+    <string name="block_sites_add_title">添加网站</string>
+    <string name="block_sites_add_hint">每行一个域名：reddit.com 或 example.*（任意后缀）。子域名一并屏蔽。</string>
+    <string name="block_sites_empty">尚未屏蔽任何网站</string>
+    <string name="block_sites_remove">移除 %s</string>
+    <string name="block_sites_added">已添加 %d 个网站</string>
+    <string name="block_sites_rejected">%d 项不是有效的域名</string>
+    <string name="block_sites_remove_title">移除网站</string>
+    <string name="block_sites_remove_message">%s 将不再被屏蔽。</string>
+    <string name="action_remove">移除</string>
+    <string name="block_sites_disable_title">关闭屏蔽？</string>
+    <string name="block_sites_disable_message">列表中的 %d 个网站将重新可访问。</string>
+    <string name="block_sites_disable_action">关闭</string>
+    <string name="block_sites_unchanged">这些网站已被屏蔽</string>
 
 </resources>

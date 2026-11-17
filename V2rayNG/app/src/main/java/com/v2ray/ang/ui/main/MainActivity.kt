@@ -30,6 +30,7 @@ import com.v2ray.ang.ui.backup.BackupActivity
 import com.v2ray.ang.ui.base.HelperBaseComponentActivity
 import com.v2ray.ang.ui.checkupdate.CheckUpdateActivity
 import com.v2ray.ang.ui.logcat.LogcatActivity
+import com.v2ray.ang.ui.block.BlockSitesActivity
 import com.v2ray.ang.ui.perappproxy.PerAppProxyActivity
 import com.v2ray.ang.ui.routing.RoutingSettingActivity
 import com.v2ray.ang.ui.server.ProfileEditorResult
@@ -148,6 +149,7 @@ class MainActivity : HelperBaseComponentActivity() {
         val intent = when (destination) {
             MainDestination.Subscriptions -> Intent(this, SubSettingActivity::class.java)
             MainDestination.PerAppProxy -> Intent(this, PerAppProxyActivity::class.java)
+            MainDestination.BlockedSites -> Intent(this, BlockSitesActivity::class.java)
             MainDestination.Routing -> Intent(this, RoutingSettingActivity::class.java)
             MainDestination.UserAssets -> Intent(this, UserAssetActivity::class.java)
             MainDestination.Settings -> Intent(this, SettingsActivity::class.java)
@@ -155,13 +157,6 @@ class MainActivity : HelperBaseComponentActivity() {
             MainDestination.CheckUpdate -> Intent(this, CheckUpdateActivity::class.java)
             MainDestination.BackupRestore -> Intent(this, BackupActivity::class.java)
             MainDestination.About -> Intent(this, AboutActivity::class.java)
-            MainDestination.Promotion -> {
-                Utils.openUri(
-                    this,
-                    "${Utils.decode(AppConfig.APP_PROMOTION_URL)}?t=${System.currentTimeMillis()}"
-                )
-                return
-            }
         }
         settingsActivityLauncher.launch(intent)
     }

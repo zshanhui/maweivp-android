@@ -295,7 +295,6 @@
     <string name="title_translators">翻譯貢獻者</string>
     <string name="title_tg_channel">Telegram 頻道</string>
 
-    <string name="title_pref_promotion">推廣</string>
 
     <string name="title_pref_auto_update_subscription">自動更新訂閱</string>
     <string name="summary_pref_auto_update_subscription">在背景依指定間隔自動更新訂閱。此功能可能因裝置而無法穩定運作。</string>
@@ -563,5 +562,23 @@
     <string name="sub_info_open_support">開啟支援連結</string>
     <string name="sub_info_open_page">開啟訂閱資訊頁面</string>
     <string name="sub_info_unlimited">無限制</string>
+
+    <string name="block_sites_title">已封鎖的網站</string>
+    <string name="block_sites_switch_title">封鎖這些網站</string>
+    <string name="block_sites_summary">已封鎖 %d 個網站。對所有應用程式生效；連線重新啟動後生效。</string>
+    <string name="block_sites_add">新增網站</string>
+    <string name="block_sites_add_title">新增網站</string>
+    <string name="block_sites_add_hint">每行一個網域：reddit.com 或 example.*（任意後綴）。子網域一併封鎖。</string>
+    <string name="block_sites_empty">尚未封鎖任何網站</string>
+    <string name="block_sites_remove">移除 %s</string>
+    <string name="block_sites_added">已新增 %d 個網站</string>
+    <string name="block_sites_rejected">%d 項不是有效的網域</string>
+    <string name="block_sites_remove_title">移除網站</string>
+    <string name="block_sites_remove_message">%s 將不再被封鎖。</string>
+    <string name="action_remove">移除</string>
+    <string name="block_sites_disable_title">關閉封鎖？</string>
+    <string name="block_sites_disable_message">列表中的 %d 個網站將重新可存取。</string>
+    <string name="block_sites_disable_action">關閉</string>
+    <string name="block_sites_unchanged">這些網站已被封鎖</string>
 
 </resources>

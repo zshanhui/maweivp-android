@@ -186,3 +186,37 @@ whitespace outside touched declarations or reorder imports except as the diff re
   issue requires it. Keep a stable path for supported non-preview devices, gate by runtime API or
   feature availability, and test both paths. After an API guard, opt-in, or lint suppression, run
   `:app:lintPlaystoreDebug` and also `:app:lintFdroidDebug` when behavior differs by distribution.
+
+<!-- LOCAL INSTRUCTIONS - START -->
+## Local harness setup (not upstream — never commit this block)
+
+Toolchain on this machine: SDK `~/Library/Android/sdk` (platform `android-37.0`, build-tools
+`37.0.0`, NDK `30.0.16248370`), JDK 21 from Android Studio's JBR. Android Studio need not be
+running; everything below is CLI-only.
+
+One entry point for the whole loop:
+
+```sh
+.agents/skills/maweivp-android/scripts/dev.sh <command>
+# doctor build test compile lint install run log dump shot tap swipe key preview render describe analyze clean
+```
+
+`.agents/skills/maweivp-android/SKILL.md` carries the same guidance in skill form (repo-scoped, so
+Pi loads it automatically). Local artifacts `.agents/` and `libs/` are excluded via
+`.git/info/exclude`, not `.gitignore`, so the tracked tree stays upstream-clean.
+
+Environment facts that cost time if rediscovered:
+
+- `V2rayNG/app/libs/` is gitignored and must be produced: `git submodule update --init --recursive`,
+  then `NDK_HOME=~/Library/Android/sdk/ndk/30.0.16248370 bash compile-hevtun.sh` and `cp -r libs
+  V2rayNG/app/`, plus `libv2ray.aar` from `2dust/AndroidLibXrayLite` release `v26.10.21` (matches
+  gitlink `76a6e217`). Missing AAR breaks Kotlin compilation on `libv2ray.*`.
+- Maven Central is throttled on this network. Pass `-I ~/.gradle/mirror-init.gradle` (dev.sh does it
+  automatically; `MAWEI_NO_MIRROR=1` disables). Mirrored artifacts are not checksum-verified — drop
+  the flag for anything you intend to distribute.
+- ABI splits mean `:app:installDebug` needs `-PABI_FILTERS=arm64-v8a`; otherwise the task fails on
+  five APKs.
+- `android preview` needs `:app@playstoreDebug`; bare `:app` fails (it looks for a `debug` variant).
+- Test device CPH2459 (Android 12): an edge swipe is system Back and kills the activity — open the
+  navigation drawer with the hamburger.
+<!-- LOCAL INSTRUCTIONS - END -->

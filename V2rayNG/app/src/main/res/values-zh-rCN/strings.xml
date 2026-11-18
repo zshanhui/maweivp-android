@@ -162,13 +162,18 @@
     <string name="menu_item_select_all">全选</string>
     <string name="menu_item_invert_selection">反选</string>
     <string name="msg_enter_keywords">输入关键字</string>
-    <string name="switch_bypass_apps_mode">绕行模式</string>
     <string name="menu_item_select_proxy_app">自动选中需代理应用</string>
     <string name="msg_downloading_content">正在下载内容</string>
     <string name="menu_item_export_proxy_app">导出至剪贴板</string>
     <string name="menu_item_import_proxy_app">从剪贴板导入</string>
     <string name="per_app_proxy_settings">分应用设置</string>
-    <string name="per_app_proxy_settings_enable">启用分应用</string>
+    <string name="per_app_proxy_settings_enable">已启用</string>
+    <string name="per_app_proxy_all_apps">所有应用都使用代理隧道</string>
+    <string name="china_mode_title">中国模式</string>
+    <string name="china_mode_summary">开启：基于中国的应用绕过隧道直接连接，同时包含你勾选的应用。\n取消勾选其中任意一个，该应用仍走代理。\n这些应用使用网络自带的 DNS，也不受屏蔽网站列表限制。</string>
+    <plurals name="per_app_proxy_bypass_count">
+        <item quantity="other">%d 个应用绕过代理隧道</item>
+    </plurals>
     <string name="app_picker_unknown_app">未知应用（无法识别 UID）</string>
 
     <!-- Preferences -->
@@ -177,7 +182,7 @@
     <string name="title_core_settings">核心设置</string>
     <string name="title_vpn_settings">VPN 设置</string>
     <string name="title_pref_per_app_proxy">分应用代理</string>
-    <string name="summary_pref_per_app_proxy">常规：勾选的应用使用代理，未勾选的应用直连；\n绕行模式：勾选的应用直连，未勾选的应用使用代理。\n菜单中可自动选择需要使用代理的应用。</string>
+    <string name="summary_pref_per_app_proxy">关闭：所有应用都使用代理隧道。\n开启：勾选的应用绕过隧道——直接连接，不走代理，也不经过屏蔽网站列表。\n本应用自身始终不经过隧道。</string>
     <string name="title_pref_is_booted">设备启动后自动连接</string>
     <string name="summary_pref_is_booted">设备启动后自动连接到所选服务器。Android 可能会限制后台启动。</string>
     <string name="title_system_vpn_settings">系统 VPN 设置</string>

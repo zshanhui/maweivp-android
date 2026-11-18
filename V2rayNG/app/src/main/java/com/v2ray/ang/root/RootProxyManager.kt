@@ -9,6 +9,7 @@ import com.v2ray.ang.handler.SettingsManager
 import com.v2ray.ang.root.RootProxyManager.TABLE
 import com.v2ray.ang.root.RootProxyManager.TUN
 import com.v2ray.ang.root.RootProxyManager.teardown
+import com.v2ray.ang.util.AppManagerUtil
 import com.v2ray.ang.util.LogUtil
 import com.v2ray.ang.util.PackageUidResolver
 import com.v2ray.ang.util.Utils
@@ -134,10 +135,24 @@ object RootProxyManager {
 
         // Per-app proxy/bypass (mirrors what VpnService does via allowed/disallowed apps).
         val perAppEnabled = MmkvManager.decodeSettingsBool(AppConfig.PREF_PER_APP_PROXY)
-        val bypassApps = MmkvManager.decodeSettingsBool(AppConfig.PREF_BYPASS_APPS)
+        // Per-app proxy is a bypass list: selected apps stay outside the tunnel.
+        val bypassApps = true
         val selectedUids = if (perAppEnabled) {
-            val pkgs = MmkvManager.decodeSettingsStringSet(AppConfig.PREF_PER_APP_PROXY_SET)?.toList().orEmpty()
-            if (pkgs.isNotEmpty()) PackageUidResolver.packageNamesToUids(context, pkgs) else emptyList()
+            val forceProxy = MmkvManager.decodeSettingsStringSet(
+                AppConfig.PREF_PER_APP_FORCE_PROXY_SET
+            )?.toSet() ?: emptySet()
+            val pkgs = MmkvManager.decodeSettingsStringSet(AppConfig.PREF_PER_APP_PROXY_SET)
+                ?.toMutableSet()
+                ?: mutableSetOf()
+            pkgs.removeAll(forceProxy)
+            if (MmkvManager.decodeSettingsBool(AppConfig.PREF_CHINA_MODE)) {
+                pkgs.addAll(AppManagerUtil.chinaBypassPackages(context.packageManager, forceProxy))
+            }
+            if (pkgs.isNotEmpty()) {
+                PackageUidResolver.packageNamesToUids(context, pkgs.toList())
+            } else {
+                emptyList()
+            }
         } else {
             emptyList()
         }

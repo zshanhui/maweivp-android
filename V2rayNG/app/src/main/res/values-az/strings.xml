@@ -162,13 +162,19 @@
     <string name="menu_item_select_all">Hamısını seç</string>
     <string name="menu_item_invert_selection">Seçimi tərsinə çevir</string>
     <string name="msg_enter_keywords">Açar sözləri daxil edin</string>
-    <string name="switch_bypass_apps_mode">Yayınma Rejimi</string>
     <string name="menu_item_select_proxy_app">Proksi istifadə edəcək tətbiqləri avtomatik seç</string>
     <string name="msg_downloading_content">Məzmun endirilir</string>
     <string name="menu_item_export_proxy_app">Mübadilə buferinə ixrac et</string>
     <string name="menu_item_import_proxy_app">Mübadilə buferindən idxal et</string>
     <string name="per_app_proxy_settings">Tətbiq üzrə proksi tənzimləmələri</string>
-    <string name="per_app_proxy_settings_enable">Tətbiq üzrə proksini aktivləşdir</string>
+    <string name="per_app_proxy_settings_enable">Aktiv</string>
+    <string name="per_app_proxy_all_apps">Bütün tətbiqlər proksi tunelindən istifadə edir</string>
+    <string name="china_mode_title">Çin rejimi</string>
+    <string name="china_mode_summary">Yandırılıb: Çin tətbiqləri tuneli yan keçib birbaşa qoşulur, seçdiyiniz tətbiqlərə əlavə olaraq.\nOnlardan birinin işarəsini çıxarsanız, o tətbiq proksidən gedir.\nYan keçən tətbiqlər şəbəkənin öz DNS-indən istifadə edir və bloklanmış saytlar süzgəcinə düşmür.</string>
+    <plurals name="per_app_proxy_bypass_count">
+        <item quantity="one">%d tətbiq proksi tunelini yan keçir</item>
+        <item quantity="other">%d tətbiq proksi tunelini yan keçir</item>
+    </plurals>
     <string name="app_picker_unknown_app">Bilinməyən tətbiq (UID tanınmadı)</string>
 
     <!-- Preferences -->
@@ -177,7 +183,7 @@
     <string name="title_core_settings">Nüvə Tənzimləmələri</string>
     <string name="title_vpn_settings">VPN Tənzimləmələri</string>
     <string name="title_pref_per_app_proxy">Tətbiq üzrə proksi</string>
-    <string name="summary_pref_per_app_proxy">Ümumi: seçilmiş tətbiqlər proksidən istifadə edir, seçilməyənlər birbaşa qoşulur;\nYayınma rejimi: seçilmiş tətbiqlər birbaşa qoşulur, seçilməyənlər proksidən istifadə edir.\nProksi istifadə etməli olan tətbiqlərin avtomatik seçilməsi seçimi menyudadır.</string>
+    <string name="summary_pref_per_app_proxy">Söndürülüb: bütün tətbiqlər proksi tunelindən istifadə edir.\nYandırılıb: seçilmiş tətbiqlər tuneli yan keçir — birbaşa qoşulma, proksi yoxdur və bloklanmış saytlar süzgəci tətbiq olunmur.\nBu tətbiq özü həmişə kənarda saxlanılır.</string>
     <string name="title_pref_is_booted">Cihaz açılanda qoşul</string>
     <string name="summary_pref_is_booted">Cihaz işə düşdükdən sonra avtomatik olaraq seçilmiş serverə qoşulun. Android fonda başladılmanı məhdudlaşdıra bilər.</string>
     <string name="title_system_vpn_settings">Sistem VPN tənzimləmələri</string>

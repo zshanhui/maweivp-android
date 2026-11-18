@@ -22,6 +22,7 @@ import com.v2ray.ang.handler.MmkvManager
 import com.v2ray.ang.handler.NotificationManager
 import com.v2ray.ang.handler.SettingsManager
 import com.v2ray.ang.root.RootLanSharing
+import com.v2ray.ang.util.AppManagerUtil
 import com.v2ray.ang.util.LogUtil
 import com.v2ray.ang.util.Utils
 import java.lang.ref.SoftReference
@@ -256,10 +257,15 @@ class CoreVpnService : VpnService(), ServiceControl {
     /**
      * Configures per-app proxy rules for the VPN builder.
      *
+     * The selection is always a bypass list: checked apps stay outside the tunnel and use the
+     * physical network directly, and every other app is captured. There is no allow list mode.
+     *
+     * China Mode adds the China-based apps from [ChinaApps] to that bypass list. An explicit
+     * uncheck of such an app is remembered in `PREF_PER_APP_FORCE_PROXY_SET` and wins over the
+     * catalogue.
+     *
      * - If per-app proxy is not enabled, disallow the VPN service's own package.
-     * - If no apps are selected, disallow the VPN service's own package.
-     * - If bypass mode is enabled, disallow all selected apps (including self).
-     * - If proxy mode is enabled, only allow the selected apps (excluding self).
+     * - Otherwise disallow the manual selection, the China Mode apps, and the service's own package.
      *
      * @param builder The VPN Builder to configure.
      */
@@ -272,26 +278,36 @@ class CoreVpnService : VpnService(), ServiceControl {
             return
         }
 
-        // If no apps are selected, disallow the VPN service's own package and return
-        val apps = MmkvManager.decodeSettingsStringSet(AppConfig.PREF_PER_APP_PROXY_SET)
-        if (apps.isNullOrEmpty()) {
+        val manualSelection = MmkvManager.decodeSettingsStringSet(AppConfig.PREF_PER_APP_PROXY_SET)
+            ?.toMutableSet()
+            ?: mutableSetOf()
+        val chinaMode = MmkvManager.decodeSettingsBool(AppConfig.PREF_CHINA_MODE)
+
+        // Nothing to bypass: the VPN covers every app.
+        if (manualSelection.isEmpty() && !chinaMode) {
             builder.addDisallowedApplication(selfPackageName)
             return
         }
 
-        val bypassApps = MmkvManager.decodeSettingsBool(AppConfig.PREF_BYPASS_APPS)
-        // Handle the VPN service's own package according to the mode
-        if (bypassApps) apps.add(selfPackageName) else apps.remove(selfPackageName)
+        val forceProxy = if (chinaMode) {
+            MmkvManager.decodeSettingsStringSet(AppConfig.PREF_PER_APP_FORCE_PROXY_SET)?.toSet()
+                ?: emptySet()
+        } else {
+            emptySet()
+        }
+
+        val apps = manualSelection.apply { removeAll(forceProxy) }
+        if (chinaMode) {
+            apps.addAll(AppManagerUtil.chinaBypassPackages(packageManager, forceProxy))
+        }
+
+        // The app's own package is always excluded, or the core's outbound sockets would be
+        // captured by the tun.
+        apps.add(selfPackageName)
 
         apps.forEach {
             try {
-                if (bypassApps) {
-                    // In bypass mode, disallow the selected apps
-                    builder.addDisallowedApplication(it)
-                } else {
-                    // In proxy mode, only allow the selected apps
-                    builder.addAllowedApplication(it)
-                }
+                builder.addDisallowedApplication(it)
             } catch (e: PackageManager.NameNotFoundException) {
                 LogUtil.e(AppConfig.TAG, "StartCore-VPN: Failed to configure app", e)
             }

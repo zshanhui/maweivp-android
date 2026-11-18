@@ -162,13 +162,18 @@
     <string name="menu_item_select_all">Chọn tất cả</string>
     <string name="menu_item_invert_selection">Đảo chọn</string>
     <string name="msg_enter_keywords">Nhập từ khoá</string>
-    <string name="switch_bypass_apps_mode">Chế độ bỏ qua</string>
     <string name="menu_item_select_proxy_app">Tự động chọn ứng dụng cần dùng proxy</string>
     <string name="msg_downloading_content">Đang tải xuống nội dung…</string>
     <string name="menu_item_export_proxy_app">Xuất và Sao chép</string>
     <string name="menu_item_import_proxy_app">Nhập từ bảng tạm</string>
     <string name="per_app_proxy_settings">Cài đặt theo ứng dụng</string>
-    <string name="per_app_proxy_settings_enable">Bật cài đặt theo ứng dụng</string>
+    <string name="per_app_proxy_settings_enable">Đã bật</string>
+    <string name="per_app_proxy_all_apps">Tất cả ứng dụng đều dùng đường hầm proxy</string>
+    <string name="china_mode_title">Chế độ Trung Quốc</string>
+    <string name="china_mode_summary">Bật: ứng dụng của Trung Quốc bỏ qua đường hầm và kết nối trực tiếp, cùng với các ứng dụng bạn đã chọn.\nBỏ chọn một ứng dụng trong số đó sẽ giữ ứng dụng ấy đi qua proxy.\nỨng dụng bỏ qua dùng DNS của mạng và không bị lọc theo danh sách chặn.</string>
+    <plurals name="per_app_proxy_bypass_count">
+        <item quantity="other">%d ứng dụng bỏ qua đường hầm proxy</item>
+    </plurals>
     <string name="app_picker_unknown_app">Ứng dụng không xác định (không nhận dạng được UID)</string>
 
     <!-- Preferences -->
@@ -177,7 +182,7 @@
     <string name="title_core_settings">Cài đặt lõi</string>
     <string name="title_vpn_settings">Cài đặt VPN</string>
     <string name="title_pref_per_app_proxy">Proxy theo từng ứng dụng</string>
-    <string name="summary_pref_per_app_proxy">Thông thường: ứng dụng đã chọn dùng proxy, ứng dụng chưa chọn kết nối trực tiếp;\nChế độ bỏ qua: ứng dụng đã chọn kết nối trực tiếp, ứng dụng chưa chọn dùng proxy.\nTrong trình đơn có tùy chọn tự động chọn các ứng dụng sẽ dùng proxy.</string>
+    <string name="summary_pref_per_app_proxy">Tắt: tất cả ứng dụng dùng đường hầm proxy.\nBật: ứng dụng đã chọn bỏ qua đường hầm — kết nối trực tiếp, không qua proxy và không lọc theo danh sách chặn.\nBản thân ứng dụng này luôn được loại trừ.</string>
     <string name="title_pref_is_booted">Kết nối sau khi thiết bị khởi động</string>
     <string name="summary_pref_is_booted">Tự động kết nối với máy chủ đã chọn sau khi thiết bị khởi động. Android có thể hạn chế khởi chạy trong nền.</string>
     <string name="title_system_vpn_settings">Cài đặt VPN hệ thống</string>

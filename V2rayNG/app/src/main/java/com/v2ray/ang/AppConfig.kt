@@ -24,7 +24,10 @@ object AppConfig {
     const val PREF_ROUTE_ONLY_ENABLED = "pref_route_only_enabled"
     const val PREF_PER_APP_PROXY = "pref_per_app_proxy"
     const val PREF_PER_APP_PROXY_SET = "pref_per_app_proxy_set"
-    const val PREF_BYPASS_APPS = "pref_bypass_apps"
+    /** Packages the user forced back through the tunnel while China Mode would bypass them. */
+    const val PREF_PER_APP_FORCE_PROXY_SET = "pref_per_app_force_proxy_set"
+    /** Bypass the China-based apps from `ChinaApps` in addition to the manual selection. */
+    const val PREF_CHINA_MODE = "pref_china_mode"
     const val PREF_LOCAL_DNS_ENABLED = "pref_local_dns_enabled"
     const val PREF_FAKE_DNS_ENABLED = "pref_fake_dns_enabled"
     const val PREF_APPEND_HTTP_PROXY = "pref_append_http_proxy"

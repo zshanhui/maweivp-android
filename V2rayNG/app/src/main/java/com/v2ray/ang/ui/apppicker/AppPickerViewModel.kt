@@ -63,7 +63,7 @@ class AppPickerViewModel(application: Application) : BaseViewModel(application) 
             try {
                 selectedSnapshot = _selectedPackages.value
                 val apps = withContext(Dispatchers.IO) {
-                    val list = AppManagerUtil.loadNetworkAppList(applicationContext)
+                    val list = AppManagerUtil.loadNetworkAppList(applicationContext, _selectedPackages.value)
                     val special = createSpecialItemUnidentified(localizedUnknownApp)
                     sortApps(list + special)
                 }

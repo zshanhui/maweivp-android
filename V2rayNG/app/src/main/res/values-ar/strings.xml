@@ -162,13 +162,21 @@
     <string name="menu_item_select_all">تحديد الكل</string>
     <string name="menu_item_invert_selection">عكس الاختيار</string>
     <string name="msg_enter_keywords">أدخل الكلمات الرئيسية</string>
-    <string name="switch_bypass_apps_mode">وضع التجاوز</string>
     <string name="menu_item_select_proxy_app">تحديد التطبيقات التي ستستخدم الوكيل تلقائيًا</string>
     <string name="msg_downloading_content">جارٍ تنزيل المحتوى</string>
     <string name="menu_item_export_proxy_app">تصدير إلى الحافظة</string>
     <string name="menu_item_import_proxy_app">استيراد من الحافظة</string>
     <string name="per_app_proxy_settings">إعدادات كل تطبيق</string>
-    <string name="per_app_proxy_settings_enable">تمكين الإعدادات لكل تطبيق</string>
+    <string name="per_app_proxy_settings_enable">مفعّل</string>
+    <string name="per_app_proxy_all_apps">جميع التطبيقات تستخدم نفق الوكيل</string>
+    <string name="china_mode_title">الوضع الصيني</string>
+    <string name="china_mode_summary">تشغيل: التطبيقات الصينية تتجاوز النفق وتتصل مباشرة، إضافة إلى التطبيقات التي تحددها.\nإلغاء تحديد أحدها يبقي ذلك التطبيق على الوكيل.\nالتطبيقات المتجاوِزة تستخدم DNS الشبكة ولا تخضع لتصفية قائمة المواقع المحجوبة.</string>
+    <plurals name="per_app_proxy_bypass_count">
+        <item quantity="one">%d تطبيق يتجاوز نفق الوكيل</item>
+        <item quantity="few">%d تطبيقات تتجاوز نفق الوكيل</item>
+        <item quantity="many">%d تطبيقًا يتجاوز نفق الوكيل</item>
+        <item quantity="other">%d تطبيق يتجاوز نفق الوكيل</item>
+    </plurals>
     <string name="app_picker_unknown_app">تطبيق غير معروف (UID غير محدد)</string>
 
     <!-- Preferences -->
@@ -177,7 +185,7 @@
     <string name="title_core_settings">إعدادات النواة</string>
     <string name="title_vpn_settings">إعدادات VPN</string>
     <string name="title_pref_per_app_proxy">الوكيل لكل تطبيق</string>
-    <string name="summary_pref_per_app_proxy">عام: تستخدم التطبيقات المحددة الوكيل، وتتصل التطبيقات غير المحددة مباشرة؛\nوضع التجاوز: تتصل التطبيقات المحددة مباشرة، وتستخدم التطبيقات غير المحددة الوكيل.\nيتوفر في القائمة خيار لتحديد التطبيقات التي ستستخدم الوكيل تلقائيًا.</string>
+    <string name="summary_pref_per_app_proxy">إيقاف: جميع التطبيقات تستخدم نفق الوكيل.\nتشغيل: التطبيقات المحددة تتجاوز النفق — اتصال مباشر، بلا وكيل وبلا تصفية عبر قائمة المواقع المحجوبة.\nهذا التطبيق نفسه مستثنى دائمًا.</string>
     <string name="title_pref_is_booted">الاتصال بعد إقلاع الجهاز</string>
     <string name="summary_pref_is_booted">الاتصال تلقائياً بالخادم المحدد بعد إقلاع الجهاز. قد يقيّد Android بدء التشغيل في الخلفية.</string>
     <string name="title_system_vpn_settings">إعدادات VPN للنظام</string>

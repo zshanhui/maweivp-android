@@ -5,6 +5,7 @@ import android.content.Context
 import com.v2ray.ang.AppConfig
 import com.v2ray.ang.dto.AppInfo
 import com.v2ray.ang.dto.UrlContentRequest
+import com.v2ray.ang.handler.ChinaApps
 import com.v2ray.ang.handler.MmkvManager
 import com.v2ray.ang.handler.SettingsChangeManager
 import com.v2ray.ang.handler.SettingsManager
@@ -41,10 +42,20 @@ class PerAppProxyViewModel(application: Application) : BaseViewModel(application
     )
     val perAppProxyEnabled: StateFlow<Boolean> = _perAppProxyEnabled.asStateFlow()
 
-    private val _bypassApps = MutableStateFlow(
-        MmkvManager.decodeSettingsBool(AppConfig.PREF_BYPASS_APPS, false)
+    private val _chinaMode = MutableStateFlow(
+        MmkvManager.decodeSettingsBool(AppConfig.PREF_CHINA_MODE, false)
     )
-    val bypassApps: StateFlow<Boolean> = _bypassApps.asStateFlow()
+    val chinaMode: StateFlow<Boolean> = _chinaMode.asStateFlow()
+
+    /** Packages that end up outside the tunnel: manual selection plus China Mode, minus overrides. */
+    private val _effectiveBypass = MutableStateFlow<Set<String>>(emptySet())
+    val effectiveBypass: StateFlow<Set<String>> = _effectiveBypass.asStateFlow()
+
+    /** China apps the user explicitly sent back through the tunnel; beats the catalogue. */
+    private val forceProxy: MutableSet<String> = MmkvManager
+        .decodeSettingsStringSet(AppConfig.PREF_PER_APP_FORCE_PROXY_SET)
+        ?.toMutableSet()
+        ?: mutableSetOf()
 
     // Cached full list for filtering
     private var appsAll: List<AppInfo>? = null
@@ -53,16 +64,61 @@ class PerAppProxyViewModel(application: Application) : BaseViewModel(application
 
     // Blacklist operations
     fun toggle(packageName: String) {
-        val currentSelection = _blacklist.value
-        val newSelection = if (packageName in currentSelection) {
-            currentSelection - packageName
+        val wasBypassed = packageName in _effectiveBypass.value
+        if (wasBypassed) {
+            // Unchecking always tunnels the app. When the catalogue would re-add it, remember the
+            // override so China Mode does not undo the user's choice.
+            if (_chinaMode.value && ChinaApps.isChinaApp(packageName)) {
+                forceProxy.add(packageName)
+            }
+            replaceBlacklist(_blacklist.value - packageName)
         } else {
-            currentSelection + packageName
+            forceProxy.remove(packageName)
+            replaceBlacklist(_blacklist.value + packageName)
         }
-        replaceBlacklist(newSelection)
+        persistForceProxy()
+        refreshDisplayedApps()
         SettingsChangeManager.makeRestartService()
     }
 
+    fun setChinaMode(enabled: Boolean) {
+        if (_chinaMode.value == enabled) return
+        _chinaMode.value = enabled
+        MmkvManager.encodeSettings(AppConfig.PREF_CHINA_MODE, enabled)
+        if (!enabled) {
+            // Overrides only mean something while the catalogue is active; keep them for a
+            // re-enable, they are small and re-applying is what the user asked for.
+        }
+        refreshDisplayedApps()
+        SettingsChangeManager.makeRestartService()
+    }
+
+    private fun persistForceProxy() {
+        MmkvManager.encodeSettings(
+            AppConfig.PREF_PER_APP_FORCE_PROXY_SET,
+            forceProxy.toMutableSet()
+        )
+    }
+
+    /** Recomputes the bypass set from the manual selection, China Mode and the overrides. */
+    private fun recomputeEffectiveBypass() {
+        val automatic = if (_chinaMode.value) {
+            (appsAll ?: emptyList()).asSequence()
+                .map { it.packageName }
+                .filter { ChinaApps.isChinaApp(it) }
+                .toSet()
+        } else {
+            emptySet()
+        }
+        _effectiveBypass.value = ((_blacklist.value + automatic) - forceProxy)
+    }
+
+    /** Re-sorts and re-filters the list and publishes it, after any state change. */
+    private fun refreshDisplayedApps() {
+        recomputeEffectiveBypass()
+        appsAll = appsAll?.let { sortApps(it) }
+        _displayedApps.value = applyFilter(currentQuery)
+    }
     private fun loadBlacklist(): Set<String> {
         return MmkvManager.decodeSettingsStringSet(AppConfig.PREF_PER_APP_PROXY_SET)?.toSet() ?: emptySet()
     }
@@ -82,13 +138,6 @@ class PerAppProxyViewModel(application: Application) : BaseViewModel(application
         }
     }
 
-    fun setBypassAppsEnabled(enabled: Boolean) {
-        if (_bypassApps.value != enabled) {
-            _bypassApps.value = enabled
-            MmkvManager.encodeSettings(AppConfig.PREF_BYPASS_APPS, enabled)
-        }
-    }
-
     // Load and filter apps
     fun loadApps(context: Context) {
         if (appsAll != null || isAppListLoading) return
@@ -98,11 +147,10 @@ class PerAppProxyViewModel(application: Application) : BaseViewModel(application
         launchLoading {
             try {
                 val apps = withContext(Dispatchers.IO) {
-                    val list = AppManagerUtil.loadNetworkAppList(applicationContext)
-                    sortApps(list)
+                    AppManagerUtil.loadNetworkAppList(applicationContext, _blacklist.value)
                 }
                 appsAll = apps
-                _displayedApps.value = applyFilter(currentQuery)
+                refreshDisplayedApps()
             } catch (e: CancellationException) {
                 throw e
             } catch (e: Exception) {
@@ -130,15 +178,19 @@ class PerAppProxyViewModel(application: Application) : BaseViewModel(application
 
     private fun sortApps(apps: List<AppInfo>): List<AppInfo> {
         val collator = Collator.getInstance()
-        val selectedPackages = _blacklist.value
+        val bypassed = _effectiveBypass.value
+        val manual = _blacklist.value
+        fun rank(packageName: String): Int = when {
+            packageName in bypassed && packageName !in manual -> 0 // China Mode
+            packageName in bypassed -> 1 // the user's own checks
+            else -> 2
+        }
         return apps.sortedWith { p1, p2 ->
-            val s1 = p1.packageName in selectedPackages
-            val s2 = p2.packageName in selectedPackages
+            val r1 = rank(p1.packageName)
+            val r2 = rank(p2.packageName)
             when {
-                s1 && !s2 -> -1
-                !s1 && s2 -> 1
-                p1.isSystemApp && !p2.isSystemApp -> 1
-                !p1.isSystemApp && p2.isSystemApp -> -1
+                r1 != r2 -> r1 - r2
+                p1.isSystemApp != p2.isSystemApp -> if (p1.isSystemApp) 1 else -1
                 else -> collator.compare(p1.appName, p2.appName)
             }
         }
@@ -147,20 +199,47 @@ class PerAppProxyViewModel(application: Application) : BaseViewModel(application
     // Bulk actions
     fun selectAll() {
         val displayedApps = _displayedApps.value
-        val currentSelection = _blacklist.value
-        val allSelected = displayedApps.all { it.packageName in currentSelection }
-        val newSelection = currentSelection.toMutableSet().apply {
+        val current = _effectiveBypass.value
+        val allSelected = displayedApps.all { it.packageName in current }
+        val newSelection = _blacklist.value.toMutableSet()
+        if (allSelected) {
+            // Clearing the visible ones: a bypassed China app needs an explicit override.
             displayedApps.forEach { app ->
-                if (allSelected) remove(app.packageName) else add(app.packageName)
+                newSelection.remove(app.packageName)
+                if (_chinaMode.value && ChinaApps.isChinaApp(app.packageName)) {
+                    forceProxy.add(app.packageName)
+                }
+            }
+        } else {
+            displayedApps.forEach { app ->
+                forceProxy.remove(app.packageName)
+                newSelection.add(app.packageName)
             }
         }
+        persistForceProxy()
         replaceBlacklist(newSelection)
+        refreshDisplayedApps()
         enablePerAppProxyAndRestart()
     }
 
     fun invertSelection() {
-        val packageNames = _displayedApps.value.map { it.packageName }
-        replaceBlacklist(AppSelection.invert(_blacklist.value, packageNames))
+        val current = _effectiveBypass.value
+        val newSelection = _blacklist.value.toMutableSet()
+        _displayedApps.value.forEach { app ->
+            val packageName = app.packageName
+            if (packageName in current) {
+                newSelection.remove(packageName)
+                if (_chinaMode.value && ChinaApps.isChinaApp(packageName)) {
+                    forceProxy.add(packageName)
+                }
+            } else {
+                forceProxy.remove(packageName)
+                newSelection.add(packageName)
+            }
+        }
+        persistForceProxy()
+        replaceBlacklist(newSelection)
+        refreshDisplayedApps()
         enablePerAppProxyAndRestart()
     }
 
@@ -221,7 +300,7 @@ class PerAppProxyViewModel(application: Application) : BaseViewModel(application
 
     fun exportProxyApp(): String {
         return buildString {
-            append(_bypassApps.value)
+            append(PER_APP_BYPASS_LIST)
             _blacklist.value.forEach { packageName ->
                 append(System.lineSeparator())
                 append(packageName)
@@ -240,7 +319,7 @@ class PerAppProxyViewModel(application: Application) : BaseViewModel(application
             } else content
             if (proxyAppList.isNullOrEmpty()) return false
 
-            val bypassApps = _bypassApps.value
+            val bypassApps = PER_APP_BYPASS_LIST
             val newBlacklist = withContext(Dispatchers.Default) {
                 AppSelection.fromProxyList(
                     packageNames = installedApps.map { it.packageName },
@@ -250,6 +329,7 @@ class PerAppProxyViewModel(application: Application) : BaseViewModel(application
                 )
             }
             replaceBlacklist(newBlacklist)
+            refreshDisplayedApps()
         } catch (e: CancellationException) {
             throw e
         } catch (e: Exception) {
@@ -262,5 +342,13 @@ class PerAppProxyViewModel(application: Application) : BaseViewModel(application
     private fun enablePerAppProxyAndRestart() {
         setPerAppProxyEnabled(true)
         SettingsChangeManager.makeRestartService()
+    }
+
+    companion object {
+        /**
+         * The per-app selection is a bypass list and always has been; the mode is not a setting.
+         * Kept as a named constant so the import/export format still carries the flag.
+         */
+        private const val PER_APP_BYPASS_LIST = true
     }
 }
